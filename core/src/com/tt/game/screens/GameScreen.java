@@ -14,12 +14,15 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.tt.game.MyGame;
 import com.tt.game.views.CardView;
 import com.tt.game.views.Zone;
+import com.tt.game.engine.rules.BasicFlipRule;
+import com.tt.game.engine.rules.FlipRule;
 
 public class GameScreen implements Screen {
 
 	private CardView selected;
 	private ArrayList<CardView> handOne, handTwo;
 	private Zone[][] zones;
+	private ArrayList<FlipRule> flipRules;
 	private MyGame myGame;
 	
 	//Delete
@@ -32,6 +35,9 @@ public class GameScreen implements Screen {
 		myGame.stage.addActor(new Image(myGame.manager.get("background2.png", Texture.class)));
 		handOne = new ArrayList<CardView>();
 		handTwo = new ArrayList<CardView>();
+		flipRules = new ArrayList<FlipRule>();
+		flipRules.add(new BasicFlipRule());
+		
 		zones = new Zone [3][3];
 		
 		for (int i = 0; i < zones.length; i++) {
@@ -126,37 +132,17 @@ public class GameScreen implements Screen {
 		if(selected != null && zone.isEmpty){			
 			zone.playCard(selected);			
 			selected.remove();
-			doFlips(zone);
+			
+			for (FlipRule flipRule : flipRules) {
+				flipRule.applyRule(zone, zones);
+			}
+			
 			selected = null;					
 			
 		}
 	}
-
-	public void doFlips(Zone zone) {
-		if (zone.y < 2 && !zones[zone.x][zone.y + 1].isEmpty) {
-			checkFlip(zone, zones[zone.x][zone.y + 1], 0);
-		}
-
-		if (zone.x < 2 && !zones[zone.x + 1][zone.y].isEmpty) {
-			checkFlip(zone, zones[zone.x + 1][zone.y], 1);
-		}
-
-		if (zone.y > 0 && !zones[zone.x][zone.y - 1].isEmpty) {
-			checkFlip(zone, zones[zone.x][zone.y - 1], 2);
-		}
-
-		if (zone.x > 0 && !zones[zone.x - 1][zone.y].isEmpty) {
-			checkFlip(zone, zones[zone.x - 1][zone.y], 3);
-		}
-
-	}
 	
-	public void checkFlip(Zone flipper, Zone toFlip, int attackingSide) {
-		if (flipper.getCardSide() != toFlip.getCardSide() && flipper.getCardPowerOn(attackingSide) > toFlip.getCardPowerOn((attackingSide + 2) % 4)) {
-			toFlip.flip();
-			doFlips(toFlip);
-		}
-	}
+	
 	
 	
 	public class SelectCardListener extends InputListener {
