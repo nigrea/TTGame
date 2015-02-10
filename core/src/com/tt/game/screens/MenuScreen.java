@@ -34,7 +34,7 @@ public class MenuScreen implements Screen{
 
         myGame.batch.begin();
         myGame.font.draw(myGame.batch, "Welcome!!! ", 100, 150);
-        myGame.font.draw(myGame.batch, "Tap anywhere to begin!", 100, 100);
+        myGame.font.draw(myGame.batch, "Tap anywhere to begin!!!!!", 100, 100);
         myGame.batch.end();
 
         if (Gdx.input.isTouched()) {

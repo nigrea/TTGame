@@ -20,8 +20,8 @@ public class LoadingScreen implements Screen {
 	@Override
 	public void render(float delta) {
 		if(myGame.manager.update()) {
-			//myGame.setScreen(new GameScreen(myGame));
-			myGame.setScreen(new SelectCardsScreen(myGame));
+			myGame.setScreen(new GameScreen(myGame));
+			//myGame.setScreen(new SelectCardsScreen(myGame));
 	      }
 
 	      // display loading information
