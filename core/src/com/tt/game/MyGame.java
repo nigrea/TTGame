@@ -31,6 +31,7 @@ public class MyGame extends Game {
 		manager.load("background.png", Texture.class);
 		manager.load("background2.png", Texture.class);
 		manager.load("ZoneTest.png", Texture.class);
+		manager.load("shittyArrow.png", Texture.class);
 
 	}
 

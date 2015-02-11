@@ -4,15 +4,19 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.tt.game.MyGame;
 import com.tt.game.views.CardView;
 import com.tt.game.views.Zone;
-import com.tt.game.engine.rules.BasicFlipRule;
 import com.tt.game.engine.rules.FlipRule;
 
 public class GameScreen implements Screen {
@@ -22,6 +26,9 @@ public class GameScreen implements Screen {
 	private Zone[][] zones;
 	private ArrayList<FlipRule> flipRules;
 	private MyGame myGame;
+	private Image shittyArrow; //TODO REMAKE!!
+	private int turn = 0, playerOnePoints = 0, playerTwoPoints = 0;
+	private Label playerOneScoreLabel, playerTwoScoreLabel, winner;
 	
 	//Delete
 	//private Zone zone;
@@ -31,6 +38,12 @@ public class GameScreen implements Screen {
 		this.myGame = myGame;
 		Gdx.input.setInputProcessor(myGame.stage);
 		myGame.stage.addActor(new Image(myGame.manager.get("background2.png", Texture.class)));
+		shittyArrow = new Image(myGame.manager.get("shittyArrow.png", Texture.class));
+		shittyArrow.setX(800);
+		shittyArrow.setY(1200);
+		myGame.stage.addActor(shittyArrow);
+		
+		
 		this.handOne = handOne;
 		this.handTwo = handTwo;
 		this.flipRules = flipRules;
@@ -47,7 +60,22 @@ public class GameScreen implements Screen {
 			}
 		}
 		
-
+		winner = new Label("", new LabelStyle(new BitmapFont(), Color.BLACK));
+		winner.setFontScale(5);
+		winner.setX(800);
+		winner.setY(1300);	
+		
+		playerOneScoreLabel = new Label(Integer.toString(playerOnePoints), new LabelStyle(new BitmapFont(), Color.BLACK));
+		playerOneScoreLabel.setFontScale(5);
+		playerOneScoreLabel.setX(600);
+		playerOneScoreLabel.setY(1200);		
+		myGame.stage.addActor(playerOneScoreLabel);
+		
+		playerTwoScoreLabel = new Label(Integer.toString(playerTwoPoints), new LabelStyle(new BitmapFont(), Color.BLACK));
+		playerTwoScoreLabel.setFontScale(5);
+		playerTwoScoreLabel.setX(1000);
+		playerTwoScoreLabel.setY(1200);		
+		myGame.stage.addActor(playerTwoScoreLabel);
 		
 
 		for (CardView card : handOne) {
@@ -56,6 +84,9 @@ public class GameScreen implements Screen {
 		for (CardView card : handTwo) {
 			card.setBounds(myGame.stage.getWidth()-450, 50+(300*handTwo.indexOf(card)), 300, 300);
 		}
+		
+		setTurn();
+		
 	}
 
 
@@ -128,7 +159,13 @@ public class GameScreen implements Screen {
 				flipRule.applyRule(zone, zones);
 			}
 			
-			selected = null;					
+			selected = null;
+			turn++;
+			setTurn();
+			countPoints();
+			if(turn >= 9){
+				endGame();
+			}
 			
 		}
 	}
@@ -136,6 +173,68 @@ public class GameScreen implements Screen {
 	
 	
 	
+	private void endGame() {
+		shittyArrow.remove();
+		String winnerString;
+		if(playerOnePoints > playerTwoPoints){
+			winnerString = "Player One Won";
+		}else{
+			winnerString = "Player Two Won";
+		}
+		winner.setText(winnerString);
+		myGame.stage.addActor(winner);
+	}
+
+
+	private void countPoints() {
+		int playerOne = 0, playerTwo = 0;
+		for (int i = 0; i < zones.length; i++) {
+			for (int j = 0; j < zones[i].length; j++) {
+				if(!zones[i][j].isEmpty){
+					if(zones[i][j].getCardSide() == 1){
+						playerOne++;
+					}else{
+						playerTwo++;
+					}
+				}
+			}
+		}
+		this.playerOnePoints = playerOne;
+		this.playerTwoPoints = playerTwo;
+		this.playerOneScoreLabel.setText(Integer.toString(playerOnePoints));
+		this.playerTwoScoreLabel.setText(Integer.toString(playerTwoPoints));
+	}
+
+
+	private void setTurn() {
+		ArrayList<CardView> activeHand, notActiveHand;
+		shittyArrow.rotateBy(180);
+		if(turn % 2 == 0){
+			shittyArrow.setX(shittyArrow.getX()+shittyArrow.getWidth());
+			shittyArrow.setY(shittyArrow.getY()+shittyArrow.getHeight());
+			activeHand = handOne;
+			notActiveHand = handTwo;
+		}else{
+			shittyArrow.setX(shittyArrow.getX()-shittyArrow.getWidth());
+			shittyArrow.setY(shittyArrow.getY()-shittyArrow.getHeight());
+			activeHand = handTwo;
+			notActiveHand = handOne;
+		}
+		
+		for (CardView cardView : notActiveHand) {
+			cardView.setTouchable(Touchable.disabled);
+		}
+		
+		for (CardView cardView : activeHand) {
+			cardView.setTouchable(Touchable.enabled);
+		}
+		
+		
+	}
+
+
+
+
 	public class SelectCardListener extends InputListener {
 		
 		CardView card;
