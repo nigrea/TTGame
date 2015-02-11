@@ -8,9 +8,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.tt.game.MyGame;
 import com.tt.game.views.CardView;
 import com.tt.game.views.Zone;
@@ -29,14 +27,13 @@ public class GameScreen implements Screen {
 	//private Zone zone;
 	
 	
-	public GameScreen(MyGame myGame) {
+	public GameScreen(MyGame myGame, ArrayList<CardView> handOne, ArrayList<CardView> handTwo, ArrayList<FlipRule> flipRules) {
 		this.myGame = myGame;
 		Gdx.input.setInputProcessor(myGame.stage);
 		myGame.stage.addActor(new Image(myGame.manager.get("background2.png", Texture.class)));
-		handOne = new ArrayList<CardView>();
-		handTwo = new ArrayList<CardView>();
-		flipRules = new ArrayList<FlipRule>();
-		flipRules.add(new BasicFlipRule());
+		this.handOne = handOne;
+		this.handTwo = handTwo;
+		this.flipRules = flipRules;
 		
 		zones = new Zone [3][3];
 		
@@ -51,13 +48,7 @@ public class GameScreen implements Screen {
 		}
 		
 
-		//For testing		
-		int[] tempPowerArray = {1,2,3,4};
 		
-		for (int i = 0; i < 5; i++) {
-			handOne.add(new CardView(1, 1, tempPowerArray, "Derpy", myGame.manager.get("sampleCard2.jpg", Texture.class)));
-			handTwo.add(new CardView(1, 2, tempPowerArray, "Derpy", myGame.manager.get("sampleCard2.jpg", Texture.class)));
-		}
 
 		for (CardView card : handOne) {
 			card.setBounds(50, 50+(300*handOne.indexOf(card)), 300, 300);

@@ -7,28 +7,49 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.tt.game.MyGame;
+import com.tt.game.engine.rules.BasicFlipRule;
+import com.tt.game.engine.rules.FlipRule;
 import com.tt.game.views.CardView;
 
 public class SelectCardsScreen implements Screen {
-	
+
 	MyGame myGame;
 	ArrayList<CardView> allCards, handOne, handTwo;
-	
-	public SelectCardsScreen(MyGame myGame){
+	private ArrayList<FlipRule> flipRules;
+
+	public SelectCardsScreen(MyGame myGame) {
 		this.myGame = myGame;
-		
+
 		allCards = new ArrayList<CardView>();
 		handOne = new ArrayList<CardView>();
 		handTwo = new ArrayList<CardView>();
-		
-		allCards.add(new CardView(1, 1, new int[] {1,2,3,4}, "Derpy", myGame.manager.get("sampleCard2.jpg", Texture.class)));
-		allCards.add(new CardView(1, 1, new int[] {3,2,3,1}, "DerpyTwo", myGame.manager.get("sampleCard.png", Texture.class)));
-		
+		flipRules = new ArrayList<FlipRule>();
+
+		allCards.add(new CardView(1, 1, new int[] { 1, 2, 3, 4 }, "Derpy",
+				myGame.manager.get("sampleCard2.jpg", Texture.class)));
+		allCards.add(new CardView(1, 1, new int[] { 3, 2, 3, 1 }, "DerpyTwo",
+				myGame.manager.get("sampleCard.png", Texture.class)));
+
 		int counter = 0;
 		for (CardView card : allCards) {
-			card.setBounds(100+(300*counter), 400, 300, 300);			
+			card.setBounds(100 + (300 * counter), 400, 300, 300);
 			counter++;
 		}
+
+		// For testing
+		int[] tempPowerArray = { 1, 2, 3, 4 };
+
+		for (int i = 0; i < 5; i++) {
+			handOne.add(new CardView(1, 1, tempPowerArray, "Derpy",
+					myGame.manager.get("sampleCard2.jpg", Texture.class)));
+			handTwo.add(new CardView(1, 2, tempPowerArray, "Derpy",
+					myGame.manager.get("sampleCard2.jpg", Texture.class)));
+		}
+
+		flipRules.add(new BasicFlipRule());
+
+		
+
 	}
 
 	@Override
@@ -36,6 +57,8 @@ public class SelectCardsScreen implements Screen {
 		for (CardView card : allCards) {
 			myGame.stage.addActor(card);
 		}
+		// For testing
+		myGame.setScreen(new GameScreen(myGame, handOne, handTwo, flipRules));
 	}
 
 	@Override
