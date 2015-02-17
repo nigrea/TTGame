@@ -1,6 +1,7 @@
 package com.tt.game.screens;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -37,11 +38,23 @@ public class SelectCardsScreen implements Screen {
 		}
 
 		// For testing
-		int[] tempPowerArray = { 1, 2, 3, 4 };
-
+		
+		Random randomGenerator = new Random();
+		int[] tempPowerArray =  new int[4];
 		for (int i = 0; i < 5; i++) {
+			tempPowerArray[0] = randomGenerator.nextInt(10);
+			tempPowerArray[1] = randomGenerator.nextInt(10);
+			tempPowerArray[2] = randomGenerator.nextInt(10);
+			tempPowerArray[3] = randomGenerator.nextInt(10);		
+			
 			handOne.add(new CardView(1, 1, tempPowerArray, "Derpy",
 					myGame.manager.get("sampleCard2.jpg", Texture.class)));
+			
+			tempPowerArray[0] = randomGenerator.nextInt(10);
+			tempPowerArray[1] = randomGenerator.nextInt(10);
+			tempPowerArray[2] = randomGenerator.nextInt(10);
+			tempPowerArray[3] = randomGenerator.nextInt(10);
+			
 			handTwo.add(new CardView(1, 2, tempPowerArray, "Derpy",
 					myGame.manager.get("sampleCard2.jpg", Texture.class)));
 		}
