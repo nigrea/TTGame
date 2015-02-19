@@ -40,8 +40,8 @@ public class SelectCardsScreen implements Screen {
 		// For testing
 		
 		Random randomGenerator = new Random();
-		int[] tempPowerArray =  new int[4];
 		for (int i = 0; i < 5; i++) {
+			int[] tempPowerArray =  new int[4];
 			tempPowerArray[0] = randomGenerator.nextInt(10);
 			tempPowerArray[1] = randomGenerator.nextInt(10);
 			tempPowerArray[2] = randomGenerator.nextInt(10);
@@ -49,7 +49,7 @@ public class SelectCardsScreen implements Screen {
 			
 			handOne.add(new CardView(1, 1, tempPowerArray, "Derpy",
 					myGame.manager.get("sampleCard2.jpg", Texture.class)));
-			
+			tempPowerArray =  new int[4];
 			tempPowerArray[0] = randomGenerator.nextInt(10);
 			tempPowerArray[1] = randomGenerator.nextInt(10);
 			tempPowerArray[2] = randomGenerator.nextInt(10);

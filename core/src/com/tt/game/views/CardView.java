@@ -29,7 +29,6 @@ public class CardView extends Actor{
 		int counter = 0;
 		for (int i : power) {
 			String label = Integer.toString(power[counter]);
-			System.out.println(label + " : " + power[counter]);
 			labels[counter] = new Label(label, new LabelStyle(new BitmapFont(), Color.BLACK));
 			labels[counter].setFontScale(4);
 			counter++;

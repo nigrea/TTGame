@@ -52,13 +52,13 @@ public class GameScreen implements Screen {
 		
 		for (int i = 0; i < zones.length; i++) {
 			for (int j = 0; j < zones[i].length; j++) {
-				System.out.println("["+i+"] ["+j+"]");
 				zones[i][j] = new Zone(myGame.manager.get("ZoneTest.png",Texture.class));
 				zones[i][j].setBounds(400+(350*i), 100+(350*j), 350, 350);
 				zones[i][j].x = i;
 				zones[i][j].y = j;
 			}
 		}
+		
 		
 		winner = new Label("", new LabelStyle(new BitmapFont(), Color.BLACK));
 		winner.setFontScale(5);
@@ -79,7 +79,7 @@ public class GameScreen implements Screen {
 		
 
 		for (CardView card : handOne) {
-			card.setBounds(50, 50+(300*handOne.indexOf(card)), 300, 300);
+			card.setBounds(50, 50+(300*handOne.indexOf(card)), 300, 300);			
 		}
 		for (CardView card : handTwo) {
 			card.setBounds(myGame.stage.getWidth()-450, 50+(300*handTwo.indexOf(card)), 300, 300);
@@ -92,7 +92,7 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void show() {
-		for (CardView cardView : handOne) {
+		for (CardView cardView : handOne) {			
 			cardView.addListener(new SelectCardListener(cardView));
 			myGame.stage.addActor(cardView);
 		}
@@ -240,7 +240,7 @@ public class GameScreen implements Screen {
 		CardView card;
 		
 		public SelectCardListener(CardView card){			
-			this.card = card;
+			this.card = card;			
 		}
 		
 		@Override
@@ -251,7 +251,7 @@ public class GameScreen implements Screen {
 					selected.wasUnselected();
 				}
 				
-				selected = card;
+				selected = card;				
 				card.wasSelected();
 					
 			}else{

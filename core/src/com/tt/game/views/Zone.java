@@ -45,6 +45,7 @@ public class Zone extends Actor {
 		isEmpty = false;
 		placedCard = selected;
 		zonePic = selected.picture;
+		
 	}
 
 	public int getCardPowerOn(int side) {
