@@ -172,7 +172,7 @@ public class GameScreen implements Screen {
 	public void applyAllRules(Zone zone){
 		
 		for (FlipRule flipRule : flipRules) {
-			flipRule.applyRule(zone, zones);
+			flipRule.applyRule(zone, zones, this);
 		}
 		
 	}

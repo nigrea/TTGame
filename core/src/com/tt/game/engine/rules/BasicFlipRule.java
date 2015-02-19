@@ -1,11 +1,15 @@
 package com.tt.game.engine.rules;
 
+import com.tt.game.screens.GameScreen;
 import com.tt.game.views.Zone;
 
 public class BasicFlipRule implements FlipRule {
 
+	GameScreen gameScreen;
+	
 	@Override
-	public void applyRule(Zone zone, Zone[][] zones) {
+	public void applyRule(Zone zone, Zone[][] zones, GameScreen gameScreen) {
+		this.gameScreen = gameScreen;
 		if (zone.y < 2 && !zones[zone.x][zone.y + 1].isEmpty) {
 			checkFlip(zone, zones[zone.x][zone.y + 1], 0, zones);
 		}
@@ -26,7 +30,7 @@ public class BasicFlipRule implements FlipRule {
 	public void checkFlip(Zone flipper, Zone toFlip, int attackingSide, Zone[][] zones) {
 		if (flipper.getCardSide() != toFlip.getCardSide() && flipper.getCardPowerOn(attackingSide) > toFlip.getCardPowerOn((attackingSide + 2) % 4)) {
 			toFlip.flip();
-			applyRule(toFlip, zones);
+			gameScreen.applyAllRules(toFlip);
 		}
 	}
 

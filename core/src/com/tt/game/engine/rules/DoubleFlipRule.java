@@ -1,12 +1,13 @@
 package com.tt.game.engine.rules;
 
+import com.tt.game.screens.GameScreen;
 import com.tt.game.views.Zone;
 
 public class DoubleFlipRule implements FlipRule {
-
+	GameScreen gameScreen;
 	@Override
-	public void applyRule(Zone zone, Zone[][] zones) {
-		System.out.println("Start of apply rule");
+	public void applyRule(Zone zone, Zone[][] zones, GameScreen gameScreen) {
+		this.gameScreen = gameScreen;	
 		if (zone.y < 2 && !zones[zone.x][zone.y + 1].isEmpty) {
 			if (zone.x < 2 && !zones[zone.x + 1][zone.y].isEmpty) {
 				checkFlip(zone, zones[zone.x + 1][zone.y], zones[zone.x][zone.y + 1], 1, 0, zones);	
@@ -45,7 +46,8 @@ public class DoubleFlipRule implements FlipRule {
 			if (flipper.getCardSide() != toFlipTwo.getCardSide() && flipper.getCardPowerOn(attackingSideTwo) == toFlipTwo.getCardPowerOn((attackingSideTwo + 2) % 4)) {
 			toFlip.flip();
 			toFlipTwo.flip();
-			applyRule(toFlip, zones);
+			gameScreen.applyAllRules(toFlip);
+			gameScreen.applyAllRules(toFlipTwo);
 			}
 		}
 	}
