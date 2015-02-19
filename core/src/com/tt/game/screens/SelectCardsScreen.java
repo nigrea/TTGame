@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.tt.game.MyGame;
 import com.tt.game.engine.rules.BasicFlipRule;
+import com.tt.game.engine.rules.DoubleFlipRule;
 import com.tt.game.engine.rules.FlipRule;
 import com.tt.game.views.CardView;
 
@@ -60,8 +61,7 @@ public class SelectCardsScreen implements Screen {
 		}
 
 		flipRules.add(new BasicFlipRule());
-
-		
+		flipRules.add(new DoubleFlipRule());
 
 	}
 
