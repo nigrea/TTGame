@@ -155,9 +155,7 @@ public class GameScreen implements Screen {
 			zone.playCard(selected);			
 			selected.remove();
 			
-			for (FlipRule flipRule : flipRules) {
-				flipRule.applyRule(zone, zones);
-			}
+			applyAllRules(zone);
 			
 			selected = null;
 			turn++;
@@ -170,6 +168,14 @@ public class GameScreen implements Screen {
 		}
 	}
 	
+	
+	public void applyAllRules(Zone zone){
+		
+		for (FlipRule flipRule : flipRules) {
+			flipRule.applyRule(zone, zones);
+		}
+		
+	}
 	
 	
 	
