@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -39,6 +40,7 @@ public class MyGame extends Game {
 		manager.load("background2.png", Texture.class);
 		manager.load("ZoneTest.png", Texture.class);
 		manager.load("shittyArrow.png", Texture.class);
+		manager.load("flip.mp3", Sound.class);
 
 	}
 

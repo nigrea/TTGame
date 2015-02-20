@@ -5,6 +5,7 @@ import static com.badlogic.gdx.scenes.scene2d.utils.Align.left;
 import static com.badlogic.gdx.scenes.scene2d.utils.Align.right;
 import static com.badlogic.gdx.scenes.scene2d.utils.Align.top;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -23,6 +24,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.SizeToAction;
 import com.badlogic.gdx.scenes.scene2d.actions.TemporalAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
+import com.tt.game.MyGame;
 
 public class CardView extends Actor {
 
@@ -31,9 +33,11 @@ public class CardView extends Actor {
 	int[] power;
 	String name;
 	public Label[] labels;
+	MyGame myGame;
 
-	public CardView(int id, int player, int[] power, String name,
+	public CardView(MyGame myGame, int id, int player, int[] power, String name,
 			Texture picture) {
+		this.myGame = myGame;
 		this.picture = new Sprite(picture);
 		this.id = id;
 		this.player = player;
@@ -100,7 +104,11 @@ public class CardView extends Actor {
 		flipAnimation();		
 	}
 	
-	private void flipAnimation(){		
+	private void flipAnimation(){
+		
+		Sound sound = myGame.manager.get("flip.mp3", Sound.class);
+		sound.play(1.0F);
+		
 		SizeToAction contractSize = new SizeToAction();
 		contractSize.setSize(0, getHeight());
 		contractSize.setDuration(0.2F);

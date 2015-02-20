@@ -27,9 +27,9 @@ public class SelectCardsScreen implements Screen {
 		handTwo = new ArrayList<CardView>();
 		flipRules = new ArrayList<FlipRule>();
 
-		allCards.add(new CardView(1, 1, new int[] { 1, 2, 3, 4 }, "Derpy",
+		allCards.add(new CardView(myGame,1, 1, new int[] { 1, 2, 3, 4 }, "Derpy",
 				myGame.manager.get("sampleCard2.jpg", Texture.class)));
-		allCards.add(new CardView(1, 1, new int[] { 3, 2, 3, 1 }, "DerpyTwo",
+		allCards.add(new CardView(myGame,1, 1, new int[] { 3, 2, 3, 1 }, "DerpyTwo",
 				myGame.manager.get("sampleCard.png", Texture.class)));
 
 		int counter = 0;
@@ -48,7 +48,7 @@ public class SelectCardsScreen implements Screen {
 			tempPowerArray[2] = randomGenerator.nextInt(10);
 			tempPowerArray[3] = randomGenerator.nextInt(10);		
 			
-			handOne.add(new CardView(1, 1, tempPowerArray, "Derpy",
+			handOne.add(new CardView(myGame,1, 1, tempPowerArray, "Derpy",
 					myGame.manager.get("sampleCard2.jpg", Texture.class)));
 			tempPowerArray =  new int[4];
 			tempPowerArray[0] = randomGenerator.nextInt(10);
@@ -56,7 +56,7 @@ public class SelectCardsScreen implements Screen {
 			tempPowerArray[2] = randomGenerator.nextInt(10);
 			tempPowerArray[3] = randomGenerator.nextInt(10);
 			
-			handTwo.add(new CardView(1, 2, tempPowerArray, "Derpy",
+			handTwo.add(new CardView(myGame,1, 2, tempPowerArray, "Derpy",
 					myGame.manager.get("sampleCard2.jpg", Texture.class)));
 		}
 
