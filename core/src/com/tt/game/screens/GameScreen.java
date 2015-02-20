@@ -79,10 +79,10 @@ public class GameScreen implements Screen {
 		
 
 		for (CardView card : handOne) {
-			card.setBounds(50, 50+(300*handOne.indexOf(card)), 300, 300);			
+			card.setBounds(50, 300*handOne.indexOf(card), 300, 300);			
 		}
 		for (CardView card : handTwo) {
-			card.setBounds(myGame.stage.getWidth()-450, 50+(300*handTwo.indexOf(card)), 300, 300);
+			card.setBounds(myGame.stage.getWidth()-400, 300*handTwo.indexOf(card), 300, 300);
 		}
 		
 		setTurn();
