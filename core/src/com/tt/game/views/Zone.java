@@ -27,10 +27,10 @@ public class Zone extends Actor {
 
 	@Override
 	public void draw(Batch batch, float parentAlpha) {
-		if(isEmpty){
+		//if(isEmpty){
 			zonePic.setBounds(getX(), getY(), getWidth(), getHeight());
 			zonePic.draw(batch);
-		}
+		//}
 		
 	}
 

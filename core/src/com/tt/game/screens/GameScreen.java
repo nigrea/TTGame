@@ -92,6 +92,13 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void show() {
+		
+		for (int i = 0; i < zones.length; i++) {
+			for (int j = 0; j < zones[i].length; j++) {
+				zones[i][j].addListener(new ZoneClickListener(zones[i][j]));
+				myGame.stage.addActor(zones[i][j]);
+			}
+		}
 		for (CardView cardView : handOne) {			
 			cardView.addListener(new SelectCardListener(cardView));
 			myGame.stage.addActor(cardView);
@@ -99,12 +106,6 @@ public class GameScreen implements Screen {
 		for (CardView cardView : handTwo) {
 			cardView.addListener(new SelectCardListener(cardView));
 			myGame.stage.addActor(cardView);
-		}
-		for (int i = 0; i < zones.length; i++) {
-			for (int j = 0; j < zones[i].length; j++) {
-				zones[i][j].addListener(new ZoneClickListener(zones[i][j]));
-				myGame.stage.addActor(zones[i][j]);
-			}
 		}
 
 		
@@ -159,7 +160,6 @@ public class GameScreen implements Screen {
 			selected = null;
 			turn++;
 			setTurn();
-			countPoints();
 			if(turn >= 9){
 				endGame();
 			}
@@ -193,17 +193,23 @@ public class GameScreen implements Screen {
 
 	private void countPoints() {
 		int playerOne = 0, playerTwo = 0;
-		for (int i = 0; i < zones.length; i++) {
-			for (int j = 0; j < zones[i].length; j++) {
-				if(!zones[i][j].isEmpty){
-					if(zones[i][j].getCardSide() == 1){
-						playerOne++;
-					}else{
-						playerTwo++;
-					}
-				}
+		
+		for (CardView cardView : handOne) {
+			if(cardView.getSide() == 1){
+				playerOne++;
+			}else{
+				playerTwo++;
 			}
 		}
+		
+		for (CardView cardView : handTwo) {
+			if(cardView.getSide() == 1){
+				playerOne++;
+			}else{
+				playerTwo++;
+			}
+		}
+		
 		this.playerOnePoints = playerOne;
 		this.playerTwoPoints = playerTwo;
 		this.playerOneScoreLabel.setText(Integer.toString(playerOnePoints));
@@ -212,6 +218,7 @@ public class GameScreen implements Screen {
 
 
 	private void setTurn() {
+		countPoints();
 		ArrayList<CardView> activeHand, notActiveHand;
 		shittyArrow.rotateBy(180);
 		if(turn % 2 == 0){
