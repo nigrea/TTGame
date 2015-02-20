@@ -1,7 +1,9 @@
 package com.tt.game;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -14,7 +16,8 @@ public class MyGame extends Game {
 	public BitmapFont font;
 	public AssetManager manager;
 	public Stage stage;
-
+	public Music music;
+	
 	@Override
 	public void create() {
 		stage = new Stage(new FitViewport(1920, 1440));		
@@ -23,6 +26,10 @@ public class MyGame extends Game {
 		manager = new AssetManager();
 		setAssets();
 		this.setScreen(new MenuScreen(this));
+		music = Gdx.audio.newMusic(Gdx.files.internal("music.mp3"));
+		music.setVolume(0.5f);                 
+		music.setLooping(true);                
+		
 	}
 
 	private void setAssets() {

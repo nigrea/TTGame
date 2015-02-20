@@ -36,6 +36,7 @@ public class GameScreen implements Screen {
 	
 	public GameScreen(MyGame myGame, ArrayList<CardView> handOne, ArrayList<CardView> handTwo, ArrayList<FlipRule> flipRules) {
 		this.myGame = myGame;
+		myGame.music.play();
 		Gdx.input.setInputProcessor(myGame.stage);
 		myGame.stage.addActor(new Image(myGame.manager.get("background2.png", Texture.class)));
 		shittyArrow = new Image(myGame.manager.get("shittyArrow.png", Texture.class));
