@@ -5,7 +5,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
+import com.badlogic.gdx.scenes.scene2d.actions.ScaleByAction;
+import com.badlogic.gdx.scenes.scene2d.actions.ScaleToAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 
@@ -86,6 +90,15 @@ public class CardView extends Actor{
 		}else{
 			side = 1;
 		}
+//		ScaleToAction action = new ScaleToAction();
+//		action.setScale(0, getHeight());
+//		action.setDuration(0.5F);
+//		this.addAction(action);
+		MoveToAction action = new MoveToAction();
+		action.setPosition(200, 200);
+		action.setDuration(0.5F);
+		this.addAction(action);
+		
 		this.picture.flip(true, false);
 	}
 	
