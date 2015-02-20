@@ -27,24 +27,17 @@ public class Zone extends Actor {
 
 	@Override
 	public void draw(Batch batch, float parentAlpha) {
-		zonePic.setBounds(getX(), getY(), getWidth(), getHeight());
-		zonePic.draw(batch);
-		if (!isEmpty) {
-			placedCard.labels[0].setBounds(getX() + 50, getY() + 70, 100, 100);
-			placedCard.labels[0].draw(batch, parentAlpha);
-			placedCard.labels[1].setBounds(getX() + 80, getY() + 40, 100, 100);
-			placedCard.labels[1].draw(batch, parentAlpha);
-			placedCard.labels[2].setBounds(getX() + 50, getY() + 10, 100, 100);
-			placedCard.labels[2].draw(batch, parentAlpha);
-			placedCard.labels[3].setBounds(getX() + 20, getY() + 40, 100, 100);
-			placedCard.labels[3].draw(batch, parentAlpha);
+		if(isEmpty){
+			zonePic.setBounds(getX(), getY(), getWidth(), getHeight());
+			zonePic.draw(batch);
 		}
+		
 	}
 
 	public void playCard(CardView selected) {
 		isEmpty = false;
 		placedCard = selected;
-		zonePic = selected.picture;
+		selected.setBounds(getX(), getY(), getWidth(), getHeight());
 		
 	}
 

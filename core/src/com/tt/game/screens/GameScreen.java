@@ -152,8 +152,7 @@ public class GameScreen implements Screen {
 	public void playCard(Zone zone) {
 		
 		if(selected != null && zone.isEmpty){			
-			zone.playCard(selected);			
-			selected.remove();
+			zone.playCard(selected);
 			
 			applyAllRules(zone);
 			
