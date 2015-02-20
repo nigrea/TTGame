@@ -201,7 +201,6 @@ public class CardView extends Actor {
 
 	@Override
 	public void setPosition(float x, float y, int alignment) {
-		System.out.println("Test");
 		super.setPosition(x, y, alignment);
 		picture.setPosition(x, y);
 		updateLabels();
