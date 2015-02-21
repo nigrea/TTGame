@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
 import com.badlogic.gdx.scenes.scene2d.actions.ParallelAction;
 import com.badlogic.gdx.scenes.scene2d.actions.ScaleByAction;
@@ -34,6 +35,7 @@ public class CardView extends Actor {
 	String name;
 	public Label[] labels;
 	MyGame myGame;
+	public boolean isPlayed; 
 
 	public CardView(MyGame myGame, int id, int player, int[] power, String name,
 			Texture picture) {
@@ -45,6 +47,7 @@ public class CardView extends Actor {
 		this.power = power;
 		this.name = name;
 		this.labels = new Label[4];
+		isPlayed = false;
 
 		int counter = 0;
 		for (int i : power) {
@@ -66,6 +69,8 @@ public class CardView extends Actor {
 	public void isPlayed(int x, int y) {
 		this.x = x;
 		this.y = y;
+		this.setTouchable(Touchable.disabled);
+		isPlayed = true;
 	}
 
 	public int getPowerOn(int side) {

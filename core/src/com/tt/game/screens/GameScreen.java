@@ -239,6 +239,7 @@ public class GameScreen implements Screen {
 		}
 		
 		for (CardView cardView : activeHand) {
+			if(!cardView.isPlayed)
 			cardView.setTouchable(Touchable.enabled);
 		}
 		

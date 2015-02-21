@@ -37,6 +37,7 @@ public class Zone extends Actor {
 	public void playCard(CardView selected) {
 		isEmpty = false;
 		placedCard = selected;
+		selected.isPlayed(x, y);
 		selected.setBounds(getX(), getY(), getWidth(), getHeight());
 		
 	}
