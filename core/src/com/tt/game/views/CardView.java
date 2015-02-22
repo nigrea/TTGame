@@ -1,9 +1,5 @@
 package com.tt.game.views;
 
-import static com.badlogic.gdx.scenes.scene2d.utils.Align.bottom;
-import static com.badlogic.gdx.scenes.scene2d.utils.Align.left;
-import static com.badlogic.gdx.scenes.scene2d.utils.Align.right;
-import static com.badlogic.gdx.scenes.scene2d.utils.Align.top;
 
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
@@ -11,15 +7,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
 import com.badlogic.gdx.scenes.scene2d.actions.ParallelAction;
-import com.badlogic.gdx.scenes.scene2d.actions.ScaleByAction;
-import com.badlogic.gdx.scenes.scene2d.actions.ScaleToAction;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.scenes.scene2d.actions.SizeToAction;
 import com.badlogic.gdx.scenes.scene2d.actions.TemporalAction;
@@ -37,6 +28,7 @@ public class CardView extends Actor {
 	public Label[] labels;
 	MyGame myGame;
 	public boolean isPlayed; 
+	public Card card;
 
 	public CardView(MyGame myGame, int id, int[] power, String name,
 			Texture picture) {
@@ -52,6 +44,7 @@ public class CardView extends Actor {
 	public CardView(MyGame myGame, Card card, Texture picture) {
 		
 		this(myGame, card.getId(), card.getPower(), card.getName(), picture);
+		this.card = card;
 		
 	}
 	
@@ -98,7 +91,7 @@ public class CardView extends Actor {
 	public void draw(Batch batch, float parentAlpha) {
 
 		picture.draw(batch);
-
+		
 		labels[0].draw(batch, parentAlpha);
 		labels[1].draw(batch, parentAlpha);
 		labels[2].draw(batch, parentAlpha);
@@ -122,9 +115,9 @@ public class CardView extends Actor {
 		} else {
 			side = 1;
 		}
-
 		flipAnimation();		
 	}
+		
 	
 	private void flipAnimation(){
 		
@@ -172,6 +165,9 @@ public class CardView extends Actor {
 		labels[3].setBounds(getX() + (getWidth() / 15), getY()
 				+ (getHeight() / 7.5F), getWidth() / 3, getHeight() / 3);
 	}
+	
+	
+	
 
 	@Override
 	public void setBounds(float x, float y, float width, float height) {

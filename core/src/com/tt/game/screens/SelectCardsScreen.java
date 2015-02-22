@@ -1,11 +1,13 @@
 package com.tt.game.screens;
 
 import java.util.ArrayList;
-import java.util.Random;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.tt.game.Card;
 import com.tt.game.MyGame;
 import com.tt.game.engine.rules.BasicFlipRule;
@@ -17,8 +19,9 @@ public class SelectCardsScreen implements Screen {
 
 	MyGame myGame;
 	ArrayList<CardView> allCards, handOne, handTwo;
-
-
+	private ArrayList<FlipRule> flipRules;
+	private CardView selected;
+	
 	public SelectCardsScreen(MyGame myGame) {
 		this.myGame = myGame;
 
@@ -39,21 +42,21 @@ public class SelectCardsScreen implements Screen {
 
 		int counter = 0;
 		for (CardView card : allCards) {
-			card.setBounds(100 + (300 * counter), 400, 300, 300);
+			card.setBounds(200 + (300 * counter), 400, 300, 300);
+			myGame.stage.addActor(card);
+			card.addListener(new SelectCardListener(card));
 			counter++;
 		}
+		
 
-		// For testing
-		
-		
+		flipRules.add(new BasicFlipRule());
+		flipRules.add(new DoubleFlipRule());
 
 	}
 
 	@Override
 	public void show() {
-		for (CardView card : allCards) {
-			myGame.stage.addActor(card);
-		}
+		
 	}
 
 	@Override
@@ -91,4 +94,31 @@ public class SelectCardsScreen implements Screen {
 		myGame.stage.dispose();
 	}
 
+	public class SelectCardListener extends InputListener {
+		
+		CardView card;
+		
+		public SelectCardListener(CardView card){			
+			this.card = card;
+			System.out.println("test2");
+		}
+		
+		@Override
+		public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+			System.out.println("test");
+			if(selected != card){
+				
+				if(selected != null){
+					selected.wasUnselected();
+				}
+				selected = card;				
+				card.wasSelected();
+					
+			}else{
+				selected = null;
+				card.wasUnselected();
+			}
+	        return true;
+	    }						
+	}
 }
