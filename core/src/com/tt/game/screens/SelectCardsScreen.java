@@ -7,6 +7,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.tt.game.Card;
 import com.tt.game.MyGame;
 import com.tt.game.engine.rules.BasicFlipRule;
 import com.tt.game.engine.rules.DoubleFlipRule;
@@ -27,10 +28,10 @@ public class SelectCardsScreen implements Screen {
 		handTwo = new ArrayList<CardView>();
 		flipRules = new ArrayList<FlipRule>();
 
-		allCards.add(new CardView(myGame,1, 1, new int[] { 1, 2, 3, 4 }, "Derpy",
-				myGame.manager.get("sampleCard2.jpg", Texture.class)));
-		allCards.add(new CardView(myGame,1, 1, new int[] { 3, 2, 3, 1 }, "DerpyTwo",
-				myGame.manager.get("sampleCard.png", Texture.class)));
+		for (Card card : myGame.cards) {
+			allCards.add(new CardView(myGame, card, myGame.manager.get("cardArt/"+card.getId()+".jpg", Texture.class)));
+		}
+
 
 		int counter = 0;
 		for (CardView card : allCards) {
@@ -42,22 +43,22 @@ public class SelectCardsScreen implements Screen {
 		
 		Random randomGenerator = new Random();
 		for (int i = 0; i < 5; i++) {
-			int[] tempPowerArray =  new int[4];
-			tempPowerArray[0] = randomGenerator.nextInt(10);
-			tempPowerArray[1] = randomGenerator.nextInt(10);
-			tempPowerArray[2] = randomGenerator.nextInt(10);
-			tempPowerArray[3] = randomGenerator.nextInt(10);		
-			
-			handOne.add(new CardView(myGame,1, 1, tempPowerArray, "Derpy",
-					myGame.manager.get("sampleCard2.jpg", Texture.class)));
-			tempPowerArray =  new int[4];
-			tempPowerArray[0] = randomGenerator.nextInt(10);
-			tempPowerArray[1] = randomGenerator.nextInt(10);
-			tempPowerArray[2] = randomGenerator.nextInt(10);
-			tempPowerArray[3] = randomGenerator.nextInt(10);
-			
-			handTwo.add(new CardView(myGame,1, 2, tempPowerArray, "Derpy",
-					myGame.manager.get("sampleCard2.jpg", Texture.class)));
+//			int[] tempPowerArray =  new int[4];
+//			tempPowerArray[0] = randomGenerator.nextInt(10);
+//			tempPowerArray[1] = randomGenerator.nextInt(10);
+//			tempPowerArray[2] = randomGenerator.nextInt(10);
+//			tempPowerArray[3] = randomGenerator.nextInt(10);		
+//			
+//			handOne.add(new CardView(myGame,1, 1, tempPowerArray, "Derpy",
+//					myGame.manager.get("sampleCard2.jpg", Texture.class)));
+//			tempPowerArray =  new int[4];
+//			tempPowerArray[0] = randomGenerator.nextInt(10);
+//			tempPowerArray[1] = randomGenerator.nextInt(10);
+//			tempPowerArray[2] = randomGenerator.nextInt(10);
+//			tempPowerArray[3] = randomGenerator.nextInt(10);
+//			
+//			handTwo.add(new CardView(myGame,1, 2, tempPowerArray, "Derpy",
+//					myGame.manager.get("sampleCard2.jpg", Texture.class)));
 		}
 
 		flipRules.add(new BasicFlipRule());
@@ -71,7 +72,7 @@ public class SelectCardsScreen implements Screen {
 			myGame.stage.addActor(card);
 		}
 		// For testing
-		myGame.setScreen(new GameScreen(myGame, handOne, handTwo, flipRules));
+		//myGame.setScreen(new GameScreen(myGame, handOne, handTwo, flipRules));
 	}
 
 	@Override

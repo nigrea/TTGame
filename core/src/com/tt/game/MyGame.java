@@ -1,5 +1,7 @@
 package com.tt.game;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
@@ -18,6 +20,7 @@ public class MyGame extends Game {
 	public AssetManager manager;
 	public Stage stage;
 	public Music music;
+	public ArrayList<Card> cards;	
 	
 	@Override
 	public void create() {
@@ -30,12 +33,16 @@ public class MyGame extends Game {
 		music = Gdx.audio.newMusic(Gdx.files.internal("music.mp3"));
 		music.setVolume(0.5f);                 
 		music.setLooping(true);                
+				
 		
 	}
 
 	private void setAssets() {
 		manager.load("sampleCard.png", Texture.class);
-		manager.load("sampleCard2.jpg", Texture.class);
+		manager.load("cardArt/1.jpg", Texture.class);
+		manager.load("cardArt/2.jpg", Texture.class);
+		manager.load("cardArt/3.jpg", Texture.class);
+		manager.load("cardArt/4.jpg", Texture.class);
 		manager.load("background.png", Texture.class);
 		manager.load("background2.png", Texture.class);
 		manager.load("ZoneTest.png", Texture.class);

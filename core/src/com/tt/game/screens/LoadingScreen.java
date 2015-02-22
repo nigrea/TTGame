@@ -1,6 +1,10 @@
 package com.tt.game.screens;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Screen;
+import com.tt.game.Card;
+import com.tt.game.CardLoader;
 import com.tt.game.MyGame;
 
 public class LoadingScreen implements Screen {
@@ -19,6 +23,7 @@ public class LoadingScreen implements Screen {
 
 	@Override
 	public void render(float delta) {
+		myGame.cards = CardLoader.loadCard();	
 		if(myGame.manager.update()) {
 			//myGame.setScreen(new GameScreen(myGame));
 			myGame.setScreen(new SelectCardsScreen(myGame));

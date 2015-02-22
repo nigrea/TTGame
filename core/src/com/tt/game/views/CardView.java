@@ -25,6 +25,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.SizeToAction;
 import com.badlogic.gdx.scenes.scene2d.actions.TemporalAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
+import com.tt.game.Card;
 import com.tt.game.MyGame;
 
 public class CardView extends Actor {
@@ -37,15 +38,24 @@ public class CardView extends Actor {
 	MyGame myGame;
 	public boolean isPlayed; 
 
-	public CardView(MyGame myGame, int id, int player, int[] power, String name,
+	public CardView(MyGame myGame, int id, int[] power, String name,
 			Texture picture) {
 		this.myGame = myGame;
 		this.picture = new Sprite(picture);
-		this.id = id;
-		this.player = player;
-		this.side = player;
+		this.id = id;				
 		this.power = power;
 		this.name = name;
+		initiate();
+		
+	}
+
+	public CardView(MyGame myGame, Card card, Texture picture) {
+		
+		this(myGame, card.getId(), card.getPower(), card.getName(), picture);
+		
+	}
+	
+	private void initiate(){
 		this.labels = new Label[4];
 		isPlayed = false;
 
@@ -64,6 +74,11 @@ public class CardView extends Actor {
 
 		setBounds(0, 0, picture.getWidth(), picture.getHeight());
 		this.picture.setBounds(getX(), getY(), getWidth(), getHeight());
+	}
+	
+	public void setPlayer(int player){
+		this.player = player;
+		this.side = player;
 	}
 
 	public void isPlayed(int x, int y) {
