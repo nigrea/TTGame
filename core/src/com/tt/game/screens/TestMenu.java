@@ -25,7 +25,7 @@ public class TestMenu implements Screen {
 	
 	//Skin skin;
  
-	final MyGame myGame;
+	MyGame myGame;
 	
 	public TestMenu(MyGame myGame){
 		
@@ -42,9 +42,7 @@ public class TestMenu implements Screen {
 		
 		final TextButton textButton=new TextButton("Play",textButtonStyle);
 		final TextButton textButtonTwo=new TextButton("Card Select",textButtonStyle);
-		textButton.setPosition(412, 434);
-		textButtonTwo.setPosition(412, 234);
-		
+
 		Table table = new Table();
 		table.add(textButton).pad(50);
 		table.row();
