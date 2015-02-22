@@ -29,8 +29,9 @@ public class TestMenu implements Screen {
 	final MyGame myGame;
 	
 	public TestMenu(MyGame myGame){
-		create();
 		this.myGame = myGame;
+		myGame.music.play();
+		create();
 	}
  
 	public void create(){

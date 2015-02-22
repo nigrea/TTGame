@@ -41,7 +41,6 @@ public class DoubleFlipRule implements FlipRule {
 	}
 	
 	public void checkFlip(Zone flipper, Zone toFlip, Zone toFlipTwo, int attackingSide, int attackingSideTwo, Zone[][] zones) {
-		System.out.println("In the check flip");
 		if (flipper.getCardSide() != toFlip.getCardSide() && flipper.getCardPowerOn(attackingSide) == toFlip.getCardPowerOn((attackingSide + 2) % 4)){
 			if (flipper.getCardSide() != toFlipTwo.getCardSide() && flipper.getCardPowerOn(attackingSideTwo) == toFlipTwo.getCardPowerOn((attackingSideTwo + 2) % 4)) {
 			toFlip.flip();
