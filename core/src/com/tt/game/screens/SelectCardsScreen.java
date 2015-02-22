@@ -166,6 +166,7 @@ public class SelectCardsScreen implements Screen {
 		}
 		@Override
 		public void changed(ChangeEvent event, Actor actor) {
+			myGame.stage.clear();
 			myGame.setScreen(new TestMenu(myGame));
 		}
 		
