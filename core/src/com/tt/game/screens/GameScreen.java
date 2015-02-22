@@ -9,12 +9,18 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 import com.tt.game.MyGame;
 import com.tt.game.views.CardView;
 import com.tt.game.views.Zone;
@@ -182,7 +188,7 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void dispose() {
-		myGame.stage.dispose();
+		myGame.stage.clear();
 	}
 	
 	public void playCard(Zone zone) {
@@ -223,6 +229,20 @@ public class GameScreen implements Screen {
 		}
 		winner.setText(winnerString);
 		myGame.stage.addActor(winner);
+		TextButtonStyle textButtonStyle = myGame.skin.get(TextButtonStyle.class);	 
+		Table buttonTable = new Table();
+		TextButton backButton = new TextButton("Back",textButtonStyle);
+		buttonTable.setFillParent(true);
+		buttonTable.add(backButton).expand().bottom().right();
+		myGame.stage.addActor(buttonTable);
+		backButton.addListener(new ChangeListener() {
+			public void changed (ChangeEvent event, Actor actor) {
+				dispose();
+				myGame.setScreen(new TestMenu(myGame));				
+			}
+			
+		}
+		);
 	}
 
 
