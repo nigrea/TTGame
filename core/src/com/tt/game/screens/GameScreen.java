@@ -104,29 +104,28 @@ public class GameScreen implements Screen {
 		myGame.stage.addActor(playerTwoScoreLabel);
 		
 
-		for (CardView card : handOne) {
-			card.setBounds(50, 300*handOne.indexOf(card), 300, 300);			
-		}
-		for (CardView card : handTwo) {
-			card.setBounds(myGame.stage.getWidth()-400, 300*handTwo.indexOf(card), 300, 300);
-		}
-		
-		setTurn();
-		
 		for (int i = 0; i < zones.length; i++) {
 			for (int j = 0; j < zones[i].length; j++) {
 				zones[i][j].addListener(new ZoneClickListener(zones[i][j]));
 				myGame.stage.addActor(zones[i][j]);
 			}
 		}
-		for (CardView cardView : handOne) {			
-			cardView.addListener(new SelectCardListener(cardView));
-			myGame.stage.addActor(cardView);
+		
+		for (CardView card : handOne) {
+			card.setBounds(50, 300*handOne.indexOf(card), 300, 300);
+			card.addListener(new SelectCardListener(card));
+			myGame.stage.addActor(card);
 		}
-		for (CardView cardView : handTwo) {
-			cardView.addListener(new SelectCardListener(cardView));
-			myGame.stage.addActor(cardView);
+		for (CardView card : handTwo) {
+			card.setBounds(myGame.stage.getWidth()-400, 300*handTwo.indexOf(card), 300, 300);
+			card.addListener(new SelectCardListener(card));
+			myGame.stage.addActor(card);
 		}
+		
+		setTurn();
+		
+		
+		
 	}
 
 
