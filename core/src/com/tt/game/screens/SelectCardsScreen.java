@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.tt.game.Card;
 import com.tt.game.MyGame;
 import com.tt.game.engine.rules.BasicFlipRule;
@@ -42,13 +43,22 @@ public class SelectCardsScreen implements Screen {
 		}
 
 
+		Table table = new Table();
+		myGame.stage.addActor(table);
 		int counter = 0;
 		for (CardView card : allCards) {
 			card.setBounds(200 + (300 * counter), 400, 300, 300);
-			myGame.stage.addActor(card);
+			table.add(card).pad(25);
+			if((counter + 1)%5 == 0){
+				table.row();
+			}
 			card.addListener(new SelectCardListener(card));
 			counter++;
 		}
+			table.debug();
+			table.setFillParent(true);
+
+		
 		
 
 		flipRules.add(new BasicFlipRule());
