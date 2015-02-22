@@ -201,7 +201,9 @@ public class SelectCardsScreen implements Screen {
 		public void changed(ChangeEvent event, Actor actor) {
 			if(player == 1){
 				if (handOne.size() <= 4){
-					handOne.add(selected);
+					CardView card = new CardView(myGame, selected.card, selected.picture.getTexture());
+					card.setPlayer(1);					
+					handOne.add(card);
 					System.out.println("Reach hand size one");
 					System.out.println(handOne.size());
 					
@@ -209,7 +211,10 @@ public class SelectCardsScreen implements Screen {
 			}
 			else if(handTwo.size() <= 4){
 				System.out.println("Reach hand size two");
-				handTwo.add(selected);
+				CardView card = new CardView(myGame, selected.card, selected.picture.getTexture());
+				card.setPlayer(2);
+				handTwo.add(card);
+				
 				System.out.println(handTwo.size());
 				}
 				

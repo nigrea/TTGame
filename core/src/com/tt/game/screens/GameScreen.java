@@ -20,7 +20,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 import com.tt.game.MyGame;
 import com.tt.game.views.CardView;
 import com.tt.game.views.Zone;
@@ -55,7 +54,7 @@ public class GameScreen implements Screen {
 		this.handTwo = handTwo;
 		flipRules = new ArrayList<FlipRule>();
 		turnRules = new ArrayList<TurnRule>();
-		turnRules.add(new HiddenHandTurnRule());
+		//turnRules.add(new HiddenHandTurnRule());
 		
 		this.myGame = myGame;
 		Gdx.input.setInputProcessor(myGame.stage);
