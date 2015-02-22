@@ -26,7 +26,9 @@ public class SelectCardsScreen implements Screen {
 		this.myGame = myGame;
 
 		allCards = new ArrayList<CardView>();
-
+		handOne = new ArrayList<CardView>();
+		handTwo = new ArrayList<CardView>();
+		flipRules = new ArrayList<FlipRule>();
 
 
 		for (Card card : myGame.cards) {
