@@ -35,7 +35,8 @@ public class SelectCardsScreen implements Screen {
 	private CardView selected;
 	
 	public SelectCardsScreen(MyGame myGame) {
-		this.myGame = myGame;		
+		this.myGame = myGame;
+
 		allCards = new ArrayList<CardView>();
 		handOne = new ArrayList<CardView>();
 		handTwo = new ArrayList<CardView>();
