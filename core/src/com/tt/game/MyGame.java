@@ -1,7 +1,7 @@
 package com.tt.game;
 
 import java.util.ArrayList;
-
+import java.util.Random;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
@@ -12,7 +12,8 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.tt.game.screens.MenuScreen;
+import com.tt.game.screens.LoadingScreen;
+
 
 public class MyGame extends Game {
 	public SpriteBatch batch;
@@ -29,7 +30,7 @@ public class MyGame extends Game {
 		font = new BitmapFont();
 		manager = new AssetManager();
 		setAssets();
-		this.setScreen(new MenuScreen(this));
+		this.setScreen(new LoadingScreen(this));
 		music = Gdx.audio.newMusic(Gdx.files.internal("music.mp3"));
 		music.setVolume(0.5f);                 
 		music.setLooping(true);                

@@ -68,9 +68,7 @@ public class CardView extends Actor {
 			counter++;
 		}
 
-		if (player == 2) {
-			this.picture.flip(true, false);
-		}
+		
 
 		setBounds(0, 0, picture.getWidth(), picture.getHeight());
 		this.picture.setBounds(getX(), getY(), getWidth(), getHeight());
@@ -79,6 +77,10 @@ public class CardView extends Actor {
 	public void setPlayer(int player){
 		this.player = player;
 		this.side = player;
+		
+		if (player == 2) {
+			this.picture.flip(true, false);
+		}
 	}
 
 	public void isPlayed(int x, int y) {

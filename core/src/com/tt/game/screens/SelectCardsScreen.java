@@ -2,7 +2,6 @@ package com.tt.game.screens;
 
 import java.util.ArrayList;
 import java.util.Random;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -18,15 +17,14 @@ public class SelectCardsScreen implements Screen {
 
 	MyGame myGame;
 	ArrayList<CardView> allCards, handOne, handTwo;
-	private ArrayList<FlipRule> flipRules;
+
 
 	public SelectCardsScreen(MyGame myGame) {
 		this.myGame = myGame;
 
 		allCards = new ArrayList<CardView>();
-		handOne = new ArrayList<CardView>();
-		handTwo = new ArrayList<CardView>();
-		flipRules = new ArrayList<FlipRule>();
+
+
 
 		for (Card card : myGame.cards) {
 			Texture pic;
@@ -47,28 +45,7 @@ public class SelectCardsScreen implements Screen {
 
 		// For testing
 		
-		Random randomGenerator = new Random();
-		for (int i = 0; i < 5; i++) {
-//			int[] tempPowerArray =  new int[4];
-//			tempPowerArray[0] = randomGenerator.nextInt(10);
-//			tempPowerArray[1] = randomGenerator.nextInt(10);
-//			tempPowerArray[2] = randomGenerator.nextInt(10);
-//			tempPowerArray[3] = randomGenerator.nextInt(10);		
-//			
-//			handOne.add(new CardView(myGame,1, 1, tempPowerArray, "Derpy",
-//					myGame.manager.get("sampleCard2.jpg", Texture.class)));
-//			tempPowerArray =  new int[4];
-//			tempPowerArray[0] = randomGenerator.nextInt(10);
-//			tempPowerArray[1] = randomGenerator.nextInt(10);
-//			tempPowerArray[2] = randomGenerator.nextInt(10);
-//			tempPowerArray[3] = randomGenerator.nextInt(10);
-//			
-//			handTwo.add(new CardView(myGame,1, 2, tempPowerArray, "Derpy",
-//					myGame.manager.get("sampleCard2.jpg", Texture.class)));
-		}
-
-		flipRules.add(new BasicFlipRule());
-		flipRules.add(new DoubleFlipRule());
+		
 
 	}
 
@@ -77,8 +54,6 @@ public class SelectCardsScreen implements Screen {
 		for (CardView card : allCards) {
 			myGame.stage.addActor(card);
 		}
-		// For testing
-		//myGame.setScreen(new GameScreen(myGame, handOne, handTwo, flipRules));
 	}
 
 	@Override

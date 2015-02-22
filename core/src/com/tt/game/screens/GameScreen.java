@@ -1,6 +1,7 @@
 package com.tt.game.screens;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -17,6 +18,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.tt.game.MyGame;
 import com.tt.game.views.CardView;
 import com.tt.game.views.Zone;
+import com.tt.game.engine.rules.BasicFlipRule;
+import com.tt.game.engine.rules.DoubleFlipRule;
 import com.tt.game.engine.rules.FlipRule;
 
 public class GameScreen implements Screen {
@@ -30,11 +33,15 @@ public class GameScreen implements Screen {
 	private int turn = 0, playerOnePoints = 0, playerTwoPoints = 0;
 	private Label playerOneScoreLabel, playerTwoScoreLabel, winner;
 	
+	
 	//Delete
 	//private Zone zone;
 	
 	
-	public GameScreen(MyGame myGame, ArrayList<CardView> handOne, ArrayList<CardView> handTwo, ArrayList<FlipRule> flipRules) {
+	public GameScreen(MyGame myGame) {	
+		handOne = new ArrayList<CardView>();
+		handTwo = new ArrayList<CardView>();
+		flipRules = new ArrayList<FlipRule>();
 		this.myGame = myGame;
 		myGame.music.play();
 		Gdx.input.setInputProcessor(myGame.stage);
@@ -44,10 +51,29 @@ public class GameScreen implements Screen {
 		shittyArrow.setY(1200);
 		myGame.stage.addActor(shittyArrow);
 		
+		Random randomGenerator = new Random();
+		for (int i = 0; i < 5; i++) {
+			int[] tempPowerArray =  new int[4];
+			tempPowerArray[0] = randomGenerator.nextInt(10);
+			tempPowerArray[1] = randomGenerator.nextInt(10);
+			tempPowerArray[2] = randomGenerator.nextInt(10);
+			tempPowerArray[3] = randomGenerator.nextInt(10);		
+			
+			handOne.add(new CardView(this.myGame, 1, tempPowerArray, "Derpy", myGame.manager.get("cardArt/default.jpg", Texture.class)));
+			tempPowerArray =  new int[4];
+			tempPowerArray[0] = randomGenerator.nextInt(10);
+			tempPowerArray[1] = randomGenerator.nextInt(10);
+			tempPowerArray[2] = randomGenerator.nextInt(10);
+			tempPowerArray[3] = randomGenerator.nextInt(10);
+			handTwo.add(new CardView(this.myGame, 2, tempPowerArray, "Derpy", myGame.manager.get("cardArt/default.jpg", Texture.class)));
+			
+			handOne.get(i).setPlayer(1);
+			handTwo.get(i).setPlayer(2);
+		}
+
+		flipRules.add(new BasicFlipRule());
+		flipRules.add(new DoubleFlipRule());
 		
-		this.handOne = handOne;
-		this.handTwo = handTwo;
-		this.flipRules = flipRules;
 		
 		zones = new Zone [3][3];
 		

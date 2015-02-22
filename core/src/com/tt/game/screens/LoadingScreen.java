@@ -26,7 +26,7 @@ public class LoadingScreen implements Screen {
 		myGame.cards = CardLoader.loadCard();	
 		if(myGame.manager.update()) {
 			//myGame.setScreen(new GameScreen(myGame));
-			myGame.setScreen(new SelectCardsScreen(myGame));
+			myGame.setScreen(new TestMenu(myGame));
 	      }
 
 	      // display loading information
