@@ -29,7 +29,7 @@ public class SelectCardsScreen implements Screen {
 		handOne = new ArrayList<CardView>();
 		handTwo = new ArrayList<CardView>();
 		flipRules = new ArrayList<FlipRule>();
-
+		Gdx.input.setInputProcessor(myGame.stage);
 
 		for (Card card : myGame.cards) {
 			Texture pic;
