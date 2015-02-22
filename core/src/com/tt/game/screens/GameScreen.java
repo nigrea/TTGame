@@ -21,16 +21,22 @@ import com.tt.game.views.Zone;
 import com.tt.game.engine.rules.BasicFlipRule;
 import com.tt.game.engine.rules.DoubleFlipRule;
 import com.tt.game.engine.rules.FlipRule;
+import com.tt.game.engine.rules.HiddenHandTurnRule;
+import com.tt.game.engine.rules.TurnRule;
 
 public class GameScreen implements Screen {
 
 	private CardView selected;
-	private ArrayList<CardView> handOne, handTwo;
+	public ArrayList<CardView> handOne;
+	public ArrayList<CardView> handTwo;
 	private Zone[][] zones;
 	private ArrayList<FlipRule> flipRules;
-	private MyGame myGame;
+	private ArrayList<TurnRule> turnRules;
+	public MyGame myGame;
 	private Image shittyArrow; //TODO REMAKE!!
-	private int turn = 0, playerOnePoints = 0, playerTwoPoints = 0;
+	public int turn = 0;
+	private int playerOnePoints = 0;
+	private int playerTwoPoints = 0;
 	private Label playerOneScoreLabel, playerTwoScoreLabel, winner;
 	
 	
@@ -42,6 +48,9 @@ public class GameScreen implements Screen {
 		handOne = new ArrayList<CardView>();
 		handTwo = new ArrayList<CardView>();
 		flipRules = new ArrayList<FlipRule>();
+		turnRules = new ArrayList<TurnRule>();
+		turnRules.add(new HiddenHandTurnRule());
+		
 		this.myGame = myGame;
 		Gdx.input.setInputProcessor(myGame.stage);
 		myGame.stage.addActor(new Image(myGame.manager.get("background2.png", Texture.class)));
@@ -261,6 +270,10 @@ public class GameScreen implements Screen {
 		
 		for (CardView cardView : notActiveHand) {
 			cardView.setTouchable(Touchable.disabled);
+		}
+		
+		for (TurnRule rule : turnRules) {
+			rule.applyRule(this);
 		}
 		
 		for (CardView cardView : activeHand) {

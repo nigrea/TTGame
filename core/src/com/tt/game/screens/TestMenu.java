@@ -22,39 +22,24 @@ import com.tt.game.MyGame;
 
  
 public class TestMenu implements Screen {
-	Skin skin;
-	Stage stage;
-
+	
+	//Skin skin;
  
 	final MyGame myGame;
 	
 	public TestMenu(MyGame myGame){
+		
 		this.myGame = myGame;
 		myGame.music.play();
 		create();
 	}
  
 	public void create(){
-		stage = new Stage();
-		Gdx.input.setInputProcessor(stage); //Receives touch and input events
-		skin = new Skin();
-		Pixmap pixmap = new Pixmap(200, 100, Format.RGBA8888);
-		pixmap.setColor(Color.GREEN);
-		pixmap.fill();
-		skin.add("white", new Texture(pixmap));
-		BitmapFont bitfont=new BitmapFont();
-		bitfont.scale(1);
-		skin.add("default",bitfont);
- 
-		TextButtonStyle textButtonStyle = new TextButtonStyle();
-		textButtonStyle.up = skin.newDrawable("white", Color.DARK_GRAY);
-		textButtonStyle.down = skin.newDrawable("white", Color.DARK_GRAY);
-		textButtonStyle.checked = skin.newDrawable("white", Color.BLUE);
-		textButtonStyle.over = skin.newDrawable("white", Color.LIGHT_GRAY);
-		textButtonStyle.font = skin.getFont("default");
- 
-		skin.add("default", textButtonStyle);
- 
+		
+		Gdx.input.setInputProcessor(myGame.stage); //Receives touch and input events
+		
+		TextButtonStyle textButtonStyle = myGame.skin.get(TextButtonStyle.class);
+		
 		final TextButton textButton=new TextButton("Play",textButtonStyle);
 		final TextButton textButtonTwo=new TextButton("Card Select",textButtonStyle);
 		textButton.setPosition(412, 434);
@@ -66,7 +51,7 @@ public class TestMenu implements Screen {
 		table.add(textButtonTwo).pad(50);
 		//table.debug();    //Uncomment for Debug lines, helpful for sizing widgets
 		table.setFillParent(true);
-		stage.addActor(table);
+		myGame.stage.addActor(table);
  
 		textButton.addListener(new ChangeListener() {
 			public void changed (ChangeEvent event, Actor actor) {
@@ -89,8 +74,8 @@ public class TestMenu implements Screen {
 	public void render (float delta) {
 		Gdx.gl.glClearColor(0.2f, 0.2f, 0.2f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
-		stage.draw();
+		myGame.stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
+		myGame.stage.draw();
 
 	}
  
@@ -101,8 +86,7 @@ public class TestMenu implements Screen {
  
 	@Override
 	public void dispose () {
-		stage.dispose();
-		skin.dispose();
+		myGame.stage.dispose();		
 	}
  
 	@Override
