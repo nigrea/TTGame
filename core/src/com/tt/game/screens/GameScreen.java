@@ -113,12 +113,6 @@ public class GameScreen implements Screen {
 		
 		setTurn();
 		
-	}
-
-
-	@Override
-	public void show() {
-		
 		for (int i = 0; i < zones.length; i++) {
 			for (int j = 0; j < zones[i].length; j++) {
 				zones[i][j].addListener(new ZoneClickListener(zones[i][j]));
@@ -133,6 +127,13 @@ public class GameScreen implements Screen {
 			cardView.addListener(new SelectCardListener(cardView));
 			myGame.stage.addActor(cardView);
 		}
+	}
+
+
+	@Override
+	public void show() {
+		
+		
 
 		
 	}
