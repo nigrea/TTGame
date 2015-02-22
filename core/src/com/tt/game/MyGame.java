@@ -38,11 +38,12 @@ public class MyGame extends Game {
 	}
 
 	private void setAssets() {
+		//find a better way!!
 		manager.load("sampleCard.png", Texture.class);
 		manager.load("cardArt/1.jpg", Texture.class);
 		manager.load("cardArt/2.jpg", Texture.class);
 		manager.load("cardArt/3.jpg", Texture.class);
-		manager.load("cardArt/4.jpg", Texture.class);
+		manager.load("cardArt/default.jpg", Texture.class);
 		manager.load("background.png", Texture.class);
 		manager.load("background2.png", Texture.class);
 		manager.load("ZoneTest.png", Texture.class);

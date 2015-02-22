@@ -29,7 +29,13 @@ public class SelectCardsScreen implements Screen {
 		flipRules = new ArrayList<FlipRule>();
 
 		for (Card card : myGame.cards) {
-			allCards.add(new CardView(myGame, card, myGame.manager.get("cardArt/"+card.getId()+".jpg", Texture.class)));
+			Texture pic;
+			if(myGame.manager.isLoaded("cardArt/"+card.getId()+".jpg")){
+				pic = myGame.manager.get("cardArt/"+card.getId()+".jpg", Texture.class);				
+			}else{
+				pic = myGame.manager.get("cardArt/default.jpg", Texture.class);				
+			}
+			allCards.add(new CardView(myGame, card, pic));
 		}
 
 
