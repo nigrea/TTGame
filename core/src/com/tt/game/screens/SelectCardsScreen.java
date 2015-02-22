@@ -24,8 +24,7 @@ public class SelectCardsScreen implements Screen {
 	private CardView selected;
 	
 	public SelectCardsScreen(MyGame myGame) {
-		this.myGame = myGame;
-
+		this.myGame = myGame;		
 		allCards = new ArrayList<CardView>();
 		handOne = new ArrayList<CardView>();
 		handTwo = new ArrayList<CardView>();
@@ -103,7 +102,7 @@ public class SelectCardsScreen implements Screen {
 
 	@Override
 	public void dispose() {
-		myGame.stage.dispose();
+		myGame.stage.clear();
 	}
 
 	public class SelectCardListener extends InputListener {

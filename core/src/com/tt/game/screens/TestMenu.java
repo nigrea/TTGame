@@ -55,16 +55,16 @@ public class TestMenu implements Screen {
  
 		textButton.addListener(new ChangeListener() {
 			public void changed (ChangeEvent event, Actor actor) {
-				myGame.setScreen(new GameScreen(myGame));
-				
+				dispose();
+				myGame.setScreen(new GameScreen(myGame));				
 			}
 			
 		}
 		);
 		textButtonTwo.addListener(new ChangeListener() {
-			public void changed (ChangeEvent event, Actor actor) {
+			public void changed (ChangeEvent event, Actor actor) {	
+				dispose();
 				myGame.setScreen(new SelectCardsScreen(myGame));
-				
 			}
 			
 		}
@@ -86,7 +86,7 @@ public class TestMenu implements Screen {
  
 	@Override
 	public void dispose () {
-		myGame.stage.dispose();		
+		myGame.stage.clear();		
 	}
  
 	@Override
