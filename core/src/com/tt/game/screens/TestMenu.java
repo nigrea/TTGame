@@ -1,5 +1,8 @@
 package com.tt.game.screens;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -18,7 +21,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 import com.tt.game.MyGame;
+import com.tt.game.views.CardView;
 
  
 public class TestMenu implements Screen {
@@ -42,7 +47,9 @@ public class TestMenu implements Screen {
 		
 		final TextButton textButton=new TextButton("Play",textButtonStyle);
 		final TextButton textButtonTwo=new TextButton("Card Select",textButtonStyle);
-
+		ArrayList<CardView> handOne = new ArrayList<CardView>();
+		ArrayList<CardView> handTwo = new ArrayList<CardView>();
+		
 		Table table = new Table();
 		table.add(textButton).pad(50);
 		table.row();
@@ -51,14 +58,28 @@ public class TestMenu implements Screen {
 		table.setFillParent(true);
 		myGame.stage.addActor(table);
  
-		textButton.addListener(new ChangeListener() {
-			public void changed (ChangeEvent event, Actor actor) {
-				dispose();
-				myGame.setScreen(new GameScreen(myGame));				
-			}
+		Random randomGenerator = new Random();
+		for (int i = 0; i < 5; i++) {
+			int[] tempPowerArray =  new int[4];
+			tempPowerArray[0] = randomGenerator.nextInt(10);
+			tempPowerArray[1] = randomGenerator.nextInt(10);
+			tempPowerArray[2] = randomGenerator.nextInt(10);
+			tempPowerArray[3] = randomGenerator.nextInt(10);		
 			
+			handOne.add(new CardView(this.myGame, 1, tempPowerArray, "Derpy", myGame.manager.get("cardArt/default.jpg", Texture.class)));
+			tempPowerArray =  new int[4];
+			tempPowerArray[0] = randomGenerator.nextInt(10);
+			tempPowerArray[1] = randomGenerator.nextInt(10);
+			tempPowerArray[2] = randomGenerator.nextInt(10);
+			tempPowerArray[3] = randomGenerator.nextInt(10);
+			handTwo.add(new CardView(this.myGame, 2, tempPowerArray, "Derpy", myGame.manager.get("cardArt/default.jpg", Texture.class)));
+			
+			handOne.get(i).setPlayer(1);
+			handTwo.get(i).setPlayer(2);
 		}
-		);
+		
+		textButton.addListener(new StartGameListener(myGame, handOne, handTwo));
+		
 		textButtonTwo.addListener(new ChangeListener() {
 			public void changed (ChangeEvent event, Actor actor) {	
 				dispose();
@@ -109,5 +130,23 @@ public class TestMenu implements Screen {
 	public void resume() {
 		// TODO Auto-generated method stub
  
+	}
+	
+	public class StartGameListener extends ChangeListener{
+
+		MyGame myGame;
+		ArrayList<CardView> handOne;
+		ArrayList<CardView> handTwo;
+		
+		public StartGameListener(MyGame myGame, ArrayList<CardView> handOne, ArrayList<CardView> handTwo){
+			this.myGame = myGame;
+			this.handOne = handOne;
+			this.handTwo = handTwo;
+		}
+		@Override
+		public void changed(ChangeEvent event, Actor actor) {
+			myGame.stage.clear();
+			myGame.setScreen(new GameScreen(myGame, handOne, handTwo));
+		}	
 	}
 }

@@ -50,9 +50,9 @@ public class GameScreen implements Screen {
 	//private Zone zone;
 	
 	
-	public GameScreen(MyGame myGame) {	
-		handOne = new ArrayList<CardView>();
-		handTwo = new ArrayList<CardView>();
+	public GameScreen(MyGame myGame, ArrayList<CardView> handOne, ArrayList<CardView> handTwo ) {	
+		this.handOne = handOne;
+		this.handTwo = handTwo;
 		flipRules = new ArrayList<FlipRule>();
 		turnRules = new ArrayList<TurnRule>();
 		turnRules.add(new HiddenHandTurnRule());
@@ -65,25 +65,7 @@ public class GameScreen implements Screen {
 		shittyArrow.setY(1200);
 		myGame.stage.addActor(shittyArrow);
 		
-		Random randomGenerator = new Random();
-		for (int i = 0; i < 5; i++) {
-			int[] tempPowerArray =  new int[4];
-			tempPowerArray[0] = randomGenerator.nextInt(10);
-			tempPowerArray[1] = randomGenerator.nextInt(10);
-			tempPowerArray[2] = randomGenerator.nextInt(10);
-			tempPowerArray[3] = randomGenerator.nextInt(10);		
-			
-			handOne.add(new CardView(this.myGame, 1, tempPowerArray, "Derpy", myGame.manager.get("cardArt/default.jpg", Texture.class)));
-			tempPowerArray =  new int[4];
-			tempPowerArray[0] = randomGenerator.nextInt(10);
-			tempPowerArray[1] = randomGenerator.nextInt(10);
-			tempPowerArray[2] = randomGenerator.nextInt(10);
-			tempPowerArray[3] = randomGenerator.nextInt(10);
-			handTwo.add(new CardView(this.myGame, 2, tempPowerArray, "Derpy", myGame.manager.get("cardArt/default.jpg", Texture.class)));
-			
-			handOne.get(i).setPlayer(1);
-			handTwo.get(i).setPlayer(2);
-		}
+
 
 		flipRules.add(new BasicFlipRule());
 		flipRules.add(new DoubleFlipRule());

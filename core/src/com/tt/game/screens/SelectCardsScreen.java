@@ -54,6 +54,7 @@ public class SelectCardsScreen implements Screen {
 		}
 
 
+		
 		Table table = new Table();
 		myGame.stage.addActor(table);
 		int counter = 0;
@@ -71,17 +72,20 @@ public class SelectCardsScreen implements Screen {
 
 
 			TextButtonStyle textButtonStyle = myGame.skin.get(TextButtonStyle.class);
-
-
-	 
 			Table buttonTable = new Table();
-			final TextButton backButton = new TextButton("Back",textButtonStyle);
+			TextButton backButton = new TextButton("Back",textButtonStyle);
 			buttonTable.setFillParent(true);
 			buttonTable.add(backButton).expand().bottom().right();
-			myGame.stage.addActor(buttonTable);
-							
+			myGame.stage.addActor(buttonTable);		
 			backButton.addListener(new ButtonListener(myGame));		
-				
+		
+			TextButton pOneSelectButton = new TextButton("To Player 1",textButtonStyle);
+			pOneSelectButton.addListener(new PlayerCardSelectListener(myGame, 1));
+			TextButton pTwoSelectButton = new TextButton("To Player 2",textButtonStyle);
+			pTwoSelectButton.addListener(new PlayerCardSelectListener(myGame, 2));	
+			buttonTable.add(pOneSelectButton).bottom();
+			buttonTable.add(pTwoSelectButton).bottom();
+	
 			
 		flipRules.add(new BasicFlipRule());
 		flipRules.add(new DoubleFlipRule());
@@ -169,7 +173,60 @@ public class SelectCardsScreen implements Screen {
 			myGame.stage.clear();
 			myGame.setScreen(new TestMenu(myGame));
 		}
+	}	
+	public class StartGameListener extends ChangeListener{
+
+		MyGame myGame;
+			
+		public StartGameListener(MyGame myGame){
+			this.myGame = myGame;
+		}
+		@Override
+		public void changed(ChangeEvent event, Actor actor) {
+			myGame.stage.clear();
+			myGame.setScreen(new GameScreen(myGame, handOne, handTwo));
+		}	
+	}
+	
+	public class PlayerCardSelectListener extends ChangeListener{
+
+		MyGame myGame;
+		int player;
 		
+		public PlayerCardSelectListener(MyGame myGame, int player){
+			this.myGame = myGame;
+			this.player = player;
+		}
+		@Override
+		public void changed(ChangeEvent event, Actor actor) {
+			if(player == 1){
+				if (handOne.size() <= 4){
+					handOne.add(selected);
+					System.out.println("Reach hand size one");
+					System.out.println(handOne.size());
+					
+				};
+			}
+			else if(handTwo.size() <= 4){
+				System.out.println("Reach hand size two");
+				handTwo.add(selected);
+				System.out.println(handTwo.size());
+				}
+				
+	
+			if(handOne.size() == 5 && handTwo.size() == 5){
+				TextButtonStyle textButtonStyle = myGame.skin.get(TextButtonStyle.class);	 
+				TextButton startGameButton = new TextButton("StartGame",textButtonStyle);
+				startGameButton.addListener(new StartGameListener(myGame));
+				Table startGameTable = new Table();
+				startGameTable.setFillParent(true);
+				startGameTable.add(startGameButton);
+				myGame.stage.clear();
+				myGame.stage.addActor(startGameTable);	
+			}	
+			
+			}
 		
 	}
+	
 }
