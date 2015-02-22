@@ -26,6 +26,7 @@ public class CardView extends Actor {
 	int[] power;
 	String name;
 	public Label[] labels;
+	public Label nameLabel;
 	MyGame myGame;
 	public boolean isPlayed; 
 	public Card card;
@@ -60,8 +61,10 @@ public class CardView extends Actor {
 			labels[counter].setFontScale(4);
 			counter++;
 		}
-
 		
+		nameLabel = new Label(name, new LabelStyle(new BitmapFont(),
+				Color.BLACK));
+		nameLabel.setFontScale(4);
 
 		setBounds(0, 0, picture.getWidth(), picture.getHeight());
 		this.picture.setBounds(getX(), getY(), getWidth(), getHeight());
@@ -92,6 +95,7 @@ public class CardView extends Actor {
 
 		picture.draw(batch);
 		
+		nameLabel.draw(batch, parentAlpha);
 		labels[0].draw(batch, parentAlpha);
 		labels[1].draw(batch, parentAlpha);
 		labels[2].draw(batch, parentAlpha);
@@ -156,6 +160,10 @@ public class CardView extends Actor {
 	}
 
 	private void updateLabels() {
+				
+		nameLabel.setPosition(getX()+((getWidth()/2)-(nameLabel.getWidth()*nameLabel.getFontScaleX()/2)), getY()+(getHeight()-(getHeight()/6)));
+		
+		
 		labels[0].setBounds(getX() + (getWidth() / 6), getY()
 				+ (getHeight() / 4.3F), getWidth() / 3, getHeight() / 3);
 		labels[1].setBounds(getX() + (getWidth() / 3.75F), getY()
