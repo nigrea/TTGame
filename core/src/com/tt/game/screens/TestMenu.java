@@ -49,6 +49,8 @@ public class TestMenu implements Screen {
 		final TextButton textButton=new TextButton("Play",textButtonStyle);
 		final TextButton textButtonTwo=new TextButton("Card Select",textButtonStyle);
 		final TextButton textButtonThree=new TextButton("AI-Game",textButtonStyle);
+		final TextButton textButtonFour=new TextButton("Setup Server",textButtonStyle);
+		final TextButton textButtonFive=new TextButton("Find Server",textButtonStyle);
 		ArrayList<CardView> handOne = new ArrayList<CardView>();
 		ArrayList<CardView> handTwo = new ArrayList<CardView>();
 		
@@ -58,6 +60,10 @@ public class TestMenu implements Screen {
 		table.add(textButtonTwo).pad(50);
 		table.row();
 		table.add(textButtonThree).pad(50);
+		table.row();
+		table.add(textButtonFour).pad(50);
+		table.row();
+		table.add(textButtonFive).pad(50);
 		//table.debug();    //Uncomment for Debug lines, helpful for sizing widgets
 		table.setFillParent(true);
 		myGame.stage.addActor(table);
@@ -94,6 +100,8 @@ public class TestMenu implements Screen {
 		);
 		
 		textButtonThree.addListener(new StartAIGameListener(myGame, handOne, handTwo));
+		textButtonFour.addListener(new SetUpServerListener(myGame));
+		textButtonFive.addListener(new FindServerListener(myGame));
 		
 	}
  
@@ -173,5 +181,35 @@ public class TestMenu implements Screen {
 			myGame.stage.clear();
 			myGame.setScreen(new AIGameScreen(myGame, handOne, handTwo, new BasicAI()));
 		}	
+	}
+	
+	public class SetUpServerListener extends ChangeListener{
+
+		MyGame myGame;
+
+		
+		public SetUpServerListener(MyGame myGame){
+			this.myGame = myGame;
+		}
+		@Override
+		public void changed(ChangeEvent event, Actor actor) {
+			myGame.stage.clear();
+			myGame.setScreen(new SetUpServerScreen(myGame));
+		}	
+	}
+	
+	public class FindServerListener extends ChangeListener{
+
+		MyGame myGame;
+
+		
+		public FindServerListener(MyGame myGame){
+			this.myGame = myGame;
+		}
+		@Override
+		public void changed(ChangeEvent event, Actor actor) {
+			myGame.stage.clear();
+			myGame.setScreen(new FindServerScreen(myGame));
+		}
 	}
 }
