@@ -1,7 +1,6 @@
 package com.tt.game.screens;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -26,15 +25,14 @@ import com.tt.game.views.Zone;
 import com.tt.game.engine.rules.BasicFlipRule;
 import com.tt.game.engine.rules.DoubleFlipRule;
 import com.tt.game.engine.rules.FlipRule;
-import com.tt.game.engine.rules.HiddenHandTurnRule;
 import com.tt.game.engine.rules.TurnRule;
 
 public class GameScreen implements Screen {
 
-	private CardView selected;
+	public CardView selected;
 	public ArrayList<CardView> handOne;
 	public ArrayList<CardView> handTwo;
-	private Zone[][] zones;
+	public Zone[][] zones;
 	private ArrayList<FlipRule> flipRules;
 	private ArrayList<TurnRule> turnRules;
 	public MyGame myGame;
@@ -253,7 +251,7 @@ public class GameScreen implements Screen {
 	}
 
 
-	private void setTurn() {
+	protected void setTurn() {
 		countPoints();
 		ArrayList<CardView> activeHand, notActiveHand;
 		shittyArrow.rotateBy(180);

@@ -23,6 +23,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 import com.tt.game.MyGame;
+import com.tt.game.engine.ai.BasicAI;
 import com.tt.game.views.CardView;
 
  
@@ -47,6 +48,7 @@ public class TestMenu implements Screen {
 		
 		final TextButton textButton=new TextButton("Play",textButtonStyle);
 		final TextButton textButtonTwo=new TextButton("Card Select",textButtonStyle);
+		final TextButton textButtonThree=new TextButton("AI-Game",textButtonStyle);
 		ArrayList<CardView> handOne = new ArrayList<CardView>();
 		ArrayList<CardView> handTwo = new ArrayList<CardView>();
 		
@@ -54,6 +56,8 @@ public class TestMenu implements Screen {
 		table.add(textButton).pad(50);
 		table.row();
 		table.add(textButtonTwo).pad(50);
+		table.row();
+		table.add(textButtonThree).pad(50);
 		//table.debug();    //Uncomment for Debug lines, helpful for sizing widgets
 		table.setFillParent(true);
 		myGame.stage.addActor(table);
@@ -88,6 +92,9 @@ public class TestMenu implements Screen {
 			
 		}
 		);
+		
+		textButtonThree.addListener(new StartAIGameListener(myGame, handOne, handTwo));
+		
 	}
  
 	public void render (float delta) {
@@ -147,6 +154,24 @@ public class TestMenu implements Screen {
 		public void changed(ChangeEvent event, Actor actor) {
 			myGame.stage.clear();
 			myGame.setScreen(new GameScreen(myGame, handOne, handTwo));
+		}	
+	}
+	
+	public class StartAIGameListener extends ChangeListener{
+
+		MyGame myGame;
+		ArrayList<CardView> handOne;
+		ArrayList<CardView> handTwo;
+		
+		public StartAIGameListener(MyGame myGame, ArrayList<CardView> handOne, ArrayList<CardView> handTwo){
+			this.myGame = myGame;
+			this.handOne = handOne;
+			this.handTwo = handTwo;
+		}
+		@Override
+		public void changed(ChangeEvent event, Actor actor) {
+			myGame.stage.clear();
+			myGame.setScreen(new AIGameScreen(myGame, handOne, handTwo, new BasicAI()));
 		}	
 	}
 }
