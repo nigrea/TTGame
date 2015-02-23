@@ -16,7 +16,6 @@ import com.badlogic.gdx.scenes.scene2d.actions.SizeToAction;
 import com.badlogic.gdx.scenes.scene2d.actions.TemporalAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
-import com.esotericsoftware.kryonet.Server;
 import com.tt.game.Card;
 import com.tt.game.MyGame;
 
@@ -40,7 +39,6 @@ public class CardView extends Actor {
 		this.power = power;
 		this.name = name;
 		initiate();
-		Server server;
 	}
 
 	public CardView(MyGame myGame, Card card, Texture picture) {
