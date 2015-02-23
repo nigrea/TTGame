@@ -7,6 +7,7 @@ import com.tt.game.MyGame;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+		config.title = "Epic Music... also Game";
 		config.width = 1024;
 		config.height = 768;
 		new LwjglApplication(new MyGame(), config);
