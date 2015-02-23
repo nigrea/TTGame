@@ -17,6 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 import com.tt.game.Card;
@@ -60,14 +61,14 @@ public class SelectCardsScreen implements Screen {
 		int counter = 0;
 		for (CardView card : allCards) {
 			card.setBounds(200 + (300 * counter), 400, 300, 300);
-			table.add(card).pad(25);
+			table.add(card).uniform().pad(15);
 			if((counter + 1)%5 == 0){
 				table.row();
 			}
 			card.addListener(new SelectCardListener(card));
 			counter++;
 		}
-			table.debug();
+			//table.debug();
 			table.setFillParent(true);
 
 
@@ -78,7 +79,8 @@ public class SelectCardsScreen implements Screen {
 			buttonTable.add(backButton).expand().bottom().right();
 			myGame.stage.addActor(buttonTable);		
 			backButton.addListener(new ButtonListener(myGame));		
-		
+			
+
 			TextButton pOneSelectButton = new TextButton("To Player 1",textButtonStyle);
 			pOneSelectButton.addListener(new PlayerCardSelectListener(myGame, 1));
 			TextButton pTwoSelectButton = new TextButton("To Player 2",textButtonStyle);
@@ -86,6 +88,7 @@ public class SelectCardsScreen implements Screen {
 			buttonTable.add(pOneSelectButton).bottom();
 			buttonTable.add(pTwoSelectButton).bottom();
 	
+			
 			
 		flipRules.add(new BasicFlipRule());
 		flipRules.add(new DoubleFlipRule());
@@ -192,18 +195,22 @@ public class SelectCardsScreen implements Screen {
 
 		MyGame myGame;
 		int player;
+		Table playerTable;
 		
 		public PlayerCardSelectListener(MyGame myGame, int player){
 			this.myGame = myGame;
 			this.player = player;
 		}
 		@Override
-		public void changed(ChangeEvent event, Actor actor) {
+		public void changed(ChangeEvent event, Actor actor) {		
+			
+		if(selected != null){
+			
 			if(player == 1){
 				if (handOne.size() <= 4){
 					CardView card = new CardView(myGame, selected.card, selected.picture.getTexture());
-					card.setPlayer(1);					
-					handOne.add(card);
+					card.setPlayer(1);
+					handOne.add(card);	
 					System.out.println("Reach hand size one");
 					System.out.println(handOne.size());
 					
@@ -214,9 +221,11 @@ public class SelectCardsScreen implements Screen {
 				CardView card = new CardView(myGame, selected.card, selected.picture.getTexture());
 				card.setPlayer(2);
 				handTwo.add(card);
-				
 				System.out.println(handTwo.size());
 				}
+			else{
+				System.out.println("Kappa");
+			}
 				
 	
 			if(handOne.size() == 5 && handTwo.size() == 5){
@@ -229,7 +238,7 @@ public class SelectCardsScreen implements Screen {
 				myGame.stage.clear();
 				myGame.stage.addActor(startGameTable);	
 			}	
-			
+		}
 			}
 		
 	}
